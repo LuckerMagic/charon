@@ -1,0 +1,18 @@
+rootProject.name = 'charon'
+
+include(
+        'charon-base',
+        'charon-base:charon-eureka',
+
+        'charon-common',
+
+        'charon-user',
+
+        'charon-otc',
+
+        'charon-exchange',
+
+        'charon-wallet',
+
+        'charon-management',
+)

@@ -1,0 +1,107 @@
+buildscript {
+
+    ext {
+        springBootVersion = '2.3.4.RELEASE'
+        springBootManagementVersion = '1.0.8.RELEASE'
+        springCloudVersion = 'Hoxton.SR8'
+    }
+    repositories {
+        maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+        mavenLocal()
+        mavenCentral()
+        jcenter()
+        maven { url 'https://repo.spring.io/snapshot' }
+        maven { url 'https://repo.spring.io/milestone' }
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath("io.spring.gradle:dependency-management-plugin:${springBootManagementVersion}")
+    }
+}
+
+//plugins {
+//    id 'org.springframework.boot' version '2.3.4.RELEASE'
+//    id 'io.spring.dependency-management' version '1.0.10.RELEASE'
+//    id 'java'
+//}
+
+
+
+
+allprojects {
+//    configurations {
+//        compileOnly {
+//            extendsFrom annotationProcessor
+//        }
+//    }
+}
+
+
+subprojects {
+    //插件
+    apply plugin: 'idea'
+    apply plugin: 'java'
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
+
+    group = 'com.charon'
+    version = '0.0.1-SNAPSHOT'
+    sourceCompatibility = '11'
+
+    repositories {
+        maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+        mavenLocal()
+        mavenCentral()
+        jcenter()
+        maven { url 'https://repo.spring.io/snapshot' }
+        maven { url 'https://repo.spring.io/milestone' }
+    }
+
+
+    dependencyManagement {
+        imports {
+            mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+        }
+    }
+
+    dependencies {
+        implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+        implementation 'org.springframework.boot:spring-boot-starter-webflux'
+//        implementation 'org.springframework.cloud:spring-cloud-config-server'
+//        implementation 'org.springframework.cloud:spring-cloud-starter-config'
+//        implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-server'
+        compileOnly 'org.projectlombok:lombok'
+        runtimeOnly 'mysql:mysql-connector-java'
+        annotationProcessor 'org.projectlombok:lombok'
+        testImplementation('org.springframework.boot:spring-boot-starter-test') {
+            exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+        }
+        testImplementation 'io.projectreactor:reactor-test'
+
+//        // https://mvnrepository.com/artifact/org.flywaydb/flyway-core
+//        compile group: 'org.flywaydb', name: 'flyway-core', version: '7.0.4'
+
+        // https://mvnrepository.com/artifact/io.springfox/springfox-swagger2
+        compile group: 'io.springfox', name: 'springfox-swagger2', version: '3.0.0'
+
+        // https://mvnrepository.com/artifact/io.springfox/springfox-swagger-ui
+        compile group: 'io.springfox', name: 'springfox-swagger-ui', version: '3.0.0'
+
+        // https://mvnrepository.com/artifact/com.github.xiaoymin/swagger-bootstrap-ui
+        compile group: 'com.github.xiaoymin', name: 'swagger-bootstrap-ui', version: '1.9.6'
+
+
+    }
+
+    test {
+        useJUnitPlatform()
+    }
+
+}
+
+
+
+
+
+
+

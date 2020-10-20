@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.charon.exchange.mapper.ExchangePairMapper">
+    <resultMap id="BaseResultMap" type="com.charon.exchange.model.entity.ExchangePairEntity">
+        <id column="pair_id" jdbcType="INTEGER" property="pairId"/>
+        <id column="coin_id" jdbcType="INTEGER" property="coinId"/>
+        <result column="unit_coin_id" jdbcType="INTEGER" property="unitCoinId"/>
+        <result column="exchange_rate" jdbcType="DECIMAL" property="exchangeRate"/>
+        <result column="start_time" jdbcType="TIME" property="startTime"/>
+        <result column="end_time" jdbcType="TIME" property="endTime"/>
+        <result column="create_by" jdbcType="INTEGER" property="createBy"/>
+        <result column="update_by" jdbcType="INTEGER" property="updateBy"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+    </resultMap>
+
+    <resultMap id="ExchangePairVOMap" type="com.charon.exchange.model.vo.ExchangePairVO">
+        <id column="coin_id" jdbcType="INTEGER" property="coinId"/>
+        <result column="coin_name" jdbcType="VARCHAR" property="coinName"/>
+        <collection property="exchangePairList" ofType="com.charon.exchange.model.vo.ExchangePairVO">
+            <id column="pair_id" jdbcType="INTEGER" property="pairId"/>
+            <id column="unit_coin_id" jdbcType="INTEGER" property="coinId"/>
+            <result column="unit_coin_name" jdbcType="VARCHAR" property="coinName"/>
+            <result column="exchange_rate" jdbcType="DECIMAL" property="exchangeRate"/>
+            <result column="start_time" jdbcType="TIME" property="startTime"/>
+            <result column="end_time" jdbcType="TIME" property="endTime"/>
+        </collection>
+
+    </resultMap>
+
+    <select id="list" resultMap="ExchangePairVOMap">
+        SELECT
+               ep.coin_id,
+               'BTC' coinName,
+               ep2.unit_coin_id,
+               'ETH' unit_coin_name,
+               ep2.exchange_rate,
+               ep2.start_time,
+               ep2.end_time
+        FROM exchange_pair ep,
+             exchange_pair ep2
+    </select>
+
+</mapper>

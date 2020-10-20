@@ -1,0 +1,30 @@
+dependencies {
+    implementation(
+            // spring boot
+            'org.springframework.boot:spring-boot-starter-jdbc',
+            'org.springframework.boot:spring-boot-starter-webflux',
+
+            'org.flywaydb:flyway-core:5.2.4',
+
+            'com.alibaba:druid-spring-boot-starter:1.2.1',
+
+//            project(
+//                    ':charon-common'
+//            )
+    )
+
+    compile(
+            project(
+                    ':charon-common'
+            )
+    )
+
+    runtimeOnly 'mysql:mysql-connector-java'
+
+
+    // https://mvnrepository.com/artifact/org.mybatis.spring.boot/mybatis-spring-boot-starter
+    compile group: 'org.mybatis.spring.boot', name: 'mybatis-spring-boot-starter', version: '2.1.3'
+
+
+
+}
