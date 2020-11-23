@@ -30,4 +30,20 @@ services:
       - mysql
     networks:
       backend:
+  redis:
+    image: redis:5.0.5-alpine3.10
+    restart: always
+    ports:
+      - "6379:6379"
+  redis-commander:
+    image: rediscommander/redis-commander:latest
+    ports:
+      - 9081:8081
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PASSWORD=hmrjrRedis
+    depends_on:
+      - redis
+    links:
+      - redis:redis
 

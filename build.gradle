@@ -2,7 +2,7 @@ buildscript {
 
     ext {
         springBootVersion = '2.3.4.RELEASE'
-        springBootManagementVersion = '1.0.8.RELEASE'
+        springBootManagementVersion = '1.0.10.RELEASE'
         springCloudVersion = 'Hoxton.SR8'
     }
     repositories {
@@ -65,13 +65,13 @@ subprojects {
     }
 
     dependencies {
-        implementation 'org.springframework.boot:spring-boot-starter-jdbc'
-        implementation 'org.springframework.boot:spring-boot-starter-webflux'
+//        implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+//        implementation 'org.springframework.boot:spring-boot-starter-webflux'
 //        implementation 'org.springframework.cloud:spring-cloud-config-server'
 //        implementation 'org.springframework.cloud:spring-cloud-starter-config'
 //        implementation 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-server'
         compileOnly 'org.projectlombok:lombok'
-        runtimeOnly 'mysql:mysql-connector-java'
+//        runtimeOnly 'mysql:mysql-connector-java'
         annotationProcessor 'org.projectlombok:lombok'
         testImplementation('org.springframework.boot:spring-boot-starter-test') {
             exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'

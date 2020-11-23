@@ -1,5 +1,9 @@
 server:
   port: 8082
+  servlet:
+    session:
+      cookie:
+        name: OAUTH2-CLIENT-SESSIONID #防止Cookie冲突，冲突会导致登录验证不通过
 spring:
   application:
     name: charon-exchange
@@ -15,3 +19,17 @@ spring:
     baseline-version: 0
 mybatis:
   mapper-locations: classpath:mapper/*Mapper.xml
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+security:
+  oauth2: #与oauth2-server对应的配置
+    client:
+      client-id: admin
+      client-secret: admin123456
+      user-authorization-uri: http://localhost:7072/oauth/authorize
+      access-token-uri: http://localhost:7072/oauth/token
+    resource:
+      jwt:
+        key-uri: http://localhost:7072/oauth/token_key

@@ -1,0 +1,15 @@
+server:
+  port: 8761
+spring:
+  application:
+    name: charon-eureka
+  cloud:
+    loadbalancer:
+      ribbon:
+        enabled: false
+eureka:
+  instance:
+    hostname: charon-eureka
+  client:
+    register-with-eureka: false
+    fetch-registry: false
